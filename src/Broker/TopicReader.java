@@ -18,6 +18,7 @@ public class TopicReader {
     public int get(String consumerName) {
         int value = 0;
         //To Do - Read next value from topicFile and return the value
+        //To Do - Handle the transaction constraints
         return value;
     }
 }

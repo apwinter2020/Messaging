@@ -18,8 +18,10 @@ public class Transaction {
     }
 
     void commit() {
+        topicWriter.writeValue(0);
         while(!values.isEmpty()) {
             topicWriter.writeValue(values.remove());
         }
+        topicWriter.writeValue(-1);
     }
 }

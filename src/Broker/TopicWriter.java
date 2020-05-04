@@ -7,7 +7,7 @@ public class TopicWriter {
     RandomAccessFile buffer;
 
     private Topic topic;
-    private HashMap<String, MessageBroker.Transaction> transactions;
+    private HashMap<String, Transaction> transactions;
 
     TopicWriter(Topic topic) {
         this.topic=topic;
@@ -46,7 +46,7 @@ public class TopicWriter {
     }
 
     private void addTransaction(String producerName) {
-        transactions.put(producerName, new MessageBroker.Transaction(this, producerName));
+        transactions.put(producerName, new Transaction(this, producerName));
     }
 
     /**
