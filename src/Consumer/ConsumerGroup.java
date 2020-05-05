@@ -15,7 +15,7 @@ public class ConsumerGroup extends Thread{
     private String groupName;
     private PrintWriter printWriter;
 
-    ConsumerGroup(MessageBroker messageBroker, String topicName, String groupName, File consumerGroupFile, int numberOfConsumers) {
+    public ConsumerGroup(MessageBroker messageBroker, String topicName, String groupName, File consumerGroupFile, int numberOfConsumers) {
         this.messageBroker = messageBroker;
         this.consumerGroupFile = consumerGroupFile;
         this.topicName = topicName;
@@ -46,6 +46,7 @@ public class ConsumerGroup extends Thread{
 
     public void performAction(Consumer consumer, int value) {
         printWriter.println("Consumer with name " + consumer.getConsumerName() + " read the value " + value);
+        printWriter.flush();
     }
 
     public String getGroupName() {
