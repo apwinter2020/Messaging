@@ -1,5 +1,6 @@
 package Broker;
 
+import java.util.LinkedList;
 import java.util.Queue;
 
 public class Transaction {
@@ -11,6 +12,7 @@ public class Transaction {
     Transaction(TopicWriter topicWriter, String producerName) {
         this.topicWriter = topicWriter;
         this.producerName = producerName;
+        values = new LinkedList<>();
     }
 
     void put(int value) {

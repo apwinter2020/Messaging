@@ -25,6 +25,8 @@ public class ProducerGroup extends Thread {
     }
 
     public void run() {
+        initialize();
+
         for(Producer producer: producers) {
             producer.start();
         }

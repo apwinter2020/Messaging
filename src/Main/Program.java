@@ -29,7 +29,7 @@ public class Program {
         File producerGroupDirectory = getProducerGroupDirectory();
         String topicName = producerGroupDirectory.getName();
 
-        File consumerGroupFile = new File("topicName.txt");
+        File consumerGroupFile = new File(topicName+".txt");
         String consumerGroupName = topicName + "Readers";
         int numberOfConsumers = 10;
 

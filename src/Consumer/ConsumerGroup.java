@@ -9,10 +9,12 @@ import java.util.ArrayList;
 
 public class ConsumerGroup extends Thread{
     private ArrayList<Consumer> consumers;
-    private File consumerGroupFile;
     private MessageBroker messageBroker;
     private String topicName;
     private String groupName;
+    private int numberOfConsumers;
+
+    private File consumerGroupFile;
     private PrintWriter printWriter;
 
     public ConsumerGroup(MessageBroker messageBroker, String topicName, String groupName, File consumerGroupFile, int numberOfConsumers) {
@@ -20,19 +22,22 @@ public class ConsumerGroup extends Thread{
         this.consumerGroupFile = consumerGroupFile;
         this.topicName = topicName;
         this.groupName = groupName;
+        this.numberOfConsumers = numberOfConsumers;
         consumers = new ArrayList<>();
     }
 
-    private void initialize(int numberOfConsumers) {
+    private void initialize() throws FileNotFoundException {
         for(int i=0;i<numberOfConsumers;i++) {
             String consumerName = groupName + "_" + i;
-            consumers.add(new Consumer(messageBroker, topicName, this, consumerName));
+            consumers.add(new Consumer(this, consumerName));
         }
+
+        printWriter = new PrintWriter(consumerGroupFile);
     }
 
     public void run() {
         try {
-            printWriter = new PrintWriter(consumerGroupFile);
+            initialize();
 
             for(Consumer consumer: consumers) {
                 consumer.start();
@@ -52,5 +57,10 @@ public class ConsumerGroup extends Thread{
     public String getGroupName() {
         return groupName;
     }
+    public String getTopicName() {
+        return topicName;
+    }
+
+    public MessageBroker getMessageBroker() { return messageBroker;    }
 }
 
